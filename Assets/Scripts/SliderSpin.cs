@@ -8,8 +8,8 @@ namespace SpinGame
 {
     public class SliderSpin : MonoBehaviour
     {
-        [SerializeField] private Image spinSlider; // Ссылка на слайдер в вашем UI
-        [SerializeField] private float maxSpins; // Максимальное количество спинов
+        [SerializeField] private Image spinSlider; 
+        [SerializeField] private float maxSpins; 
         [SerializeField] private ParticleSystem _particles;
         [SerializeField] private Slider _sliderParticleTransform;
 

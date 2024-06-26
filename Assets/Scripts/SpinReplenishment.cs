@@ -21,10 +21,8 @@ namespace SpinGame
             {
                 if (currentSpins < maxSpins)
                 {
-                    // Ожидание времени восполнения
                     yield return new WaitForSeconds(replenishRate);
                     currentSpins++;
-                    // Обновление UI или других компонентов игры
                     UpdateSpinCountUI();
                 }
                 else

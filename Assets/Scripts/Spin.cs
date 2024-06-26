@@ -95,7 +95,6 @@ namespace SpinGame
 				{
 					if (!isCoroutineRunning)
 						StartCoroutine(AnimateTimeReplenish());
-					// ќжидание времени восполнени€
 					yield return new WaitForSeconds(_replenishRate);
 					
 
@@ -107,7 +106,6 @@ namespace SpinGame
 				}
 				else
 				{
-					// ќжидание, пока количество спинов не станет меньше максимума
 					yield return new WaitUntil(() => _countSpins < _gameInfo.CountSpinAvailable);
 				}
 			}
@@ -130,7 +128,6 @@ namespace SpinGame
 				if (_countSpins < _gameInfo.CountSpinAvailable)
 				{
 					_countSpins++;
-					// ќбновление UI или других компонентов игры
 					OnUpdateSpinCount?.Invoke(_countSpins);
 				}
 			}

@@ -52,7 +52,7 @@ namespace SpinGame
             while (timer < animationDuration)
             {
                 int scoreToDisplay = (int)Mathf.Lerp(currentScore, finalScore, timer / animationDuration);
-                _textCoins.text = scoreToDisplay.ToString("N0"); // Форматирование с разделителями групп разрядов
+                _textCoins.text = scoreToDisplay.ToString("N0"); 
                 timer += Time.deltaTime;
                 yield return null;
             }
