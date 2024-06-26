@@ -97,12 +97,6 @@ namespace SpinGame
 						StartCoroutine(AnimateTimeReplenish());
 					yield return new WaitForSeconds(_replenishRate);
 					
-
-					if (_countSpins == 0)
-					{
-						_uiSpinButton.interactable = true;
-						_uiSpinButtonText.text = "Spin";
-					}
 				}
 				else
 				{
@@ -127,6 +121,11 @@ namespace SpinGame
 
 				if (_countSpins < _gameInfo.CountSpinAvailable)
 				{
+					if (_countSpins == 0)
+					{
+						_uiSpinButton.interactable = true;
+						_uiSpinButtonText.text = "Spin";
+					}
 					_countSpins++;
 					OnUpdateSpinCount?.Invoke(_countSpins);
 				}

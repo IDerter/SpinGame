@@ -993,6 +993,7 @@ MonoBehaviour:
   _gameInfo: {fileID: 1891291900}
   _countSpins: 0
   _replenishRate: 15
+  isCoroutineRunning: 0
 --- !u!4 &790163011
 Transform:
   m_ObjectHideFlags: 0
