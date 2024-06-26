@@ -21,6 +21,7 @@ namespace SpinGame
 
 		[SerializeField] private int _countSpins;
 		[SerializeField] private float _replenishRate = 20f;
+		[SerializeField] private bool isCoroutineRunning = false;
 
 		private void Start()
 		{
@@ -89,21 +90,19 @@ namespace SpinGame
 		{
 			while (true)
 			{
-				StartCoroutine(AnimateTimeReplenish());
+				
 				if (_countSpins < _gameInfo.CountSpinAvailable)
 				{
+					if (!isCoroutineRunning)
+						StartCoroutine(AnimateTimeReplenish());
 					// Ожидание времени восполнения
 					yield return new WaitForSeconds(_replenishRate);
+					
+
 					if (_countSpins == 0)
 					{
 						_uiSpinButton.interactable = true;
 						_uiSpinButtonText.text = "Spin";
-					}
-					if (_countSpins < _gameInfo.CountSpinAvailable)
-                    {
-						_countSpins++;
-						// Обновление UI или других компонентов игры
-						OnUpdateSpinCount?.Invoke(_countSpins);
 					}
 				}
 				else
@@ -116,12 +115,24 @@ namespace SpinGame
 
 		private IEnumerator AnimateTimeReplenish()
 		{
-			float timer = _replenishRate;
-			while (timer > 0)
-			{
-				timer -= Time.deltaTime;
-				_uiSpinReplenishText.text = "1 spin in " + ((int)timer).ToString() + " sec";
-				yield return null;
+			if (!isCoroutineRunning)
+            {
+				isCoroutineRunning = true;
+				float timer = _replenishRate;
+				while (timer > 0)
+				{
+					timer -= Time.deltaTime;
+					_uiSpinReplenishText.text = "1 spin in " + ((int)timer).ToString() + " sec";
+					yield return null;
+				}
+				isCoroutineRunning = false;
+
+				if (_countSpins < _gameInfo.CountSpinAvailable)
+				{
+					_countSpins++;
+					// Обновление UI или других компонентов игры
+					OnUpdateSpinCount?.Invoke(_countSpins);
+				}
 			}
 		}
 	}
