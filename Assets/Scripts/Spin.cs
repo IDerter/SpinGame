@@ -29,8 +29,6 @@ namespace SpinGame
 
 			_countSpins = _gameInfo.CountSpinAvailable;
 
-
-
 			_uiSpinButton.onClick.AddListener(() =>
 			{
 				StartCoroutine(ReplenishSpins());
@@ -54,7 +52,6 @@ namespace SpinGame
 					_pickerWheel.Spin();
 				}
 			});
-
 		}
 
 		private void SpinEnd(WheelPiece wheelPiece)
@@ -100,6 +97,7 @@ namespace SpinGame
 				}
 				else
 				{
+					_uiSpinReplenishText.text = "1 spin in " + _replenishRate.ToString() + " sec";
 					yield return new WaitUntil(() => _countSpins < _gameInfo.CountSpinAvailable);
 				}
 			}
